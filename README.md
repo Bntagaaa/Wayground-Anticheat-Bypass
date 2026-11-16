@@ -1,6 +1,7 @@
 # Wayground Helper
 
-A small, experimental browser extension project for **Chrome/Chromium** and **Firefox**, scoped to pages on `wayground.com`.
+**An browser extention that Bypass Wayground Anticheat restriction. Switch tab, resize windows freely without anticheat trigger on your teacher screen**
+
 
 > [!WARNING]
 > This extension modifies page behavior and interferes with site activity listeners. It is **not affiliated with Wayground**, is **not guaranteed to work**, and should only be used where permitted by the site's rules and your institution's policies. In particular, it must not be relied on to bypass assessment or proctoring requirements.
@@ -65,16 +66,8 @@ The extension uses a content script configured to run at `document_start` in the
 
 **Known limitations:**
 
-- Event interception may disrupt ordinary website functionality.
-- CSS overrides may alter the behavior of input fields, buttons, and interactive UI.
-- Spoofed API values do not actually enter fullscreen mode or focus a browser tab.
-- Some properties may be non-configurable or behave differently across browsers.
-- No automated tests, release builds, or compatibility guarantees are provided in this repository.
-- Changes made by Wayground or browser updates can affect behavior at any time.
-
-## Development
-
-Edit the files in the relevant browser folder, then reload the extension from the browser's extension-development page and reload any affected tabs. The two versions currently share the same `content.js` logic, but use separate manifests.
+- May not work in quiz that have power up enable
+- Mastery Peak mode isnt tested
 
 ## Disclaimer
 
