@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Wayground Helper (Firefox)",
+  "version": "0.2.0",
+  "description": "Wayground-specific page interaction customization for Firefox.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "wayground-helper@example.org",
+      "strict_min_version": "128.0"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.wayground.com/*",
+        "*://wayground.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true,
+      "world": "MAIN"
+    }
+  ]
+}
