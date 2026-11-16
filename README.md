@@ -1,10 +1,10 @@
 # Wayground Helper
 
-**An browser extention that Bypass Wayground Anticheat restriction. Switch tab, resize windows freely without anticheat trigger on your teacher screen**
+**An browser extention that Bypass Wayground Anticheat restriction. Switch tab, resize windows freely without anticheat trigger on your teacher screen. Works on chronium and gecko based browser**
 
 
 > [!WARNING]
-> This extension modifies page behavior and interferes with site activity listeners. It is **not affiliated with Wayground**, is **not guaranteed to work**, and should only be used where permitted by the site's rules and your institution's policies. In particular, it must not be relied on to bypass assessment or proctoring requirements.
+> This extension modifies page behavior and interferes with site activity listeners. It is **not affiliated with Wayground**, is **not guaranteed to work**, iam not responsible if your teacher banning you from exam, get 0 score, wayground site got freeze/not working properly and should only be used where permitted by the site's rules and your institution's policies. In particular, it must not be relied on to bypass assessment or proctoring requirements.
 
 ## What it does
 
