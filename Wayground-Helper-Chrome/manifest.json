@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Wayground-Helper",
+  "version": "0.1.0",
+  "description": "Bypass Wayground AntiCheat Protection",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.wayground.com/*",
+        "*://wayground.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true,
+      "world": "MAIN"
+    }
+  ]
+}
