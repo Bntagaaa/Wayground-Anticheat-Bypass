@@ -1,74 +1,77 @@
 # Wayground Helper
 
-**An browser extention that Bypass Wayground Anticheat restriction. Switch tab, resize windows freely without anticheat trigger on your teacher screen. Works on chronium and gecko based browser**
-
+A browser extension for Chrome/Chromium and Firefox. It changes page interaction behavior and has an optional site-scope control.
 
 > [!WARNING]
-> This extension modifies page behavior and interferes with site activity listeners. It is **not affiliated with Wayground**, is **not guaranteed to work**, iam not responsible if your teacher banning you from exam, get 0 score, wayground site got freeze/not working properly and should only be used where permitted by the site's rules and your institution's policies. In particular, it must not be relied on to bypass assessment or proctoring requirements.
+> This extension interferes with website event listeners, can break pages, and is not affiliated with Wayground. It is not guaranteed to work. Use it only where permitted by the site's terms and your institution's policies. Do not rely on it to bypass assessments or proctoring requirements.
 
-## What it does
+## Scope settings (new)
 
-The current source attempts to:
+Click the **Wayground Helper** extension icon to open **Settings > Apply to**:
 
-- Override the reported **page visibility** and **focus** values.
-- Override some **Fullscreen API** properties and reported outer window dimensions.
-- Intercept page events involving visibility, blur, page exit, fullscreen changes, and window resizing.
-- Enable text selection with injected CSS.
-- Intercept clipboard, context-menu, and text-selection related events.
+- **Wayground Only** (default): `wayground.com` and its subdomains.
+- **All Websites**: HTTP and HTTPS websites. You will be asked to grant the browser's additional host-access permission before this can be enabled.
 
-These are JavaScript-level changes, **not** changes to actual browser fullscreen state or operating-system focus. Depending on browser restrictions, site implementation, or extension injection timing, some changes may have no effect.
+Your choice is saved in extension-local storage and persists after closing/restarting the browser. Changing scope updates a dynamically registered content script, so new page loads use the selected scope; **reload already-open tabs** to apply the new scope. Switching back to Wayground Only also revokes optional access to all websites.
 
-## Browser versions
+Broad site access is optional and is not requested on installation. All Websites may unexpectedly affect unrelated pages. Browser-protected pages (`chrome://`, `about:`, extension stores, etc.) cannot be modified.
 
-| Browser | Directory | Extension version | Manifest |
+## Browser builds
+
+| Browser | Directory | Version | Manifest |
 | --- | --- | --- | --- |
-| Chrome / Chromium-based browsers | `Wayground-Helper-Chrome/` | `0.1.0` | Manifest V3 |
-| Firefox | `Wayground-Helper-Firefox/` | `0.2.0` | Manifest V3 |
+| Chrome / Chromium | `Wayground-Helper-Chrome/` | `0.2.0` | V3 (service worker) |
+| Firefox 128+ | `Wayground-Helper-Firefox/` | `0.3.0` | V3 (event-page background script) |
 
-Both builds contain a `manifest.json` and `content.js`. The manifests limit matching URLs to `wayground.com` and its subdomains and request early, main-world content-script injection.
+Both versions use the same popup UI and the same scope-registration logic. The existing `content.js` behavior remains unchanged.
 
-## Installation (local development)
+## Installation (development)
 
 ### Chrome / Chromium
 
 1. Download or clone this repository.
 2. Open `chrome://extensions`.
-3. Turn on **Developer mode**.
-4. Select **Load unpacked**.
-5. Choose the **`Wayground-Helper-Chrome`** directory (the folder containing `manifest.json`).
+3. Enable **Developer mode**.
+4. Select **Load unpacked** and choose `Wayground-Helper-Chrome/`.
+5. Pin the extension, then click its icon to choose the scope.
 
-You can remove or disable the extension from the same page.
-
-### Firefox (temporary development installation)
+### Firefox
 
 1. Download or clone this repository.
 2. Open `about:debugging#/runtime/this-firefox`.
 3. Click **Load Temporary Add-on…**.
 4. Select `Wayground-Helper-Firefox/manifest.json`.
+5. Click the extension icon and choose the scope.
 
-Temporary add-ons are normally removed when Firefox restarts. Permanent installation on regular Firefox builds generally requires a signed add-on package. The Firefox manifest specifies **Firefox 128+**, but that is a declared minimum, not a guarantee that every API works as intended.
+Firefox temporary add-ons are normally removed upon browser restart. For permanent installation on standard Firefox, a signed package is generally required.
 
 ## Project structure
 
 ```text
-Wayground-Helper/
-├── Wayground-Helper-Chrome/
-│   ├── manifest.json
-│   └── content.js
-└── Wayground-Helper-Firefox/
-    ├── manifest.json
-    └── content.js
+Wayground-Helper-Chrome/
+  manifest.json
+  content.js
+  background.js
+  popup.html
+  popup.css
+  popup.js
+Wayground-Helper-Firefox/
+  manifest.json
+  content.js
+  background.js
+  popup.html
+  popup.css
+  popup.js
 ```
 
-## How it works
+## Implementation notes
 
-The extension uses a content script configured to run at `document_start` in the page's main JavaScript world. It inserts a CSS rule to make text selectable, overrides certain browser-exposed document properties, and registers capturing event listeners.
-
-**Known limitations:**
-
-- May not work in quiz that have power up enable
-- Mastery Peak mode isnt tested
+- The background script registers a content script through `scripting.registerContentScripts()`.
+- It preserves `document_start`, all-frame injection, and the page's `MAIN` execution world.
+- Registrations persist between browser sessions and are reconciled on installation, startup, permission changes, and setting changes.
+- Only Wayground host access is requested by default; broader HTTP/HTTPS access is optional.
+- Browser behavior and site detection may vary. On already-open tabs, a full reload is required for the new registration to take effect.
 
 ## Disclaimer
 
-This is an independent experimental project provided **as is**. Respect website terms of service, academic-integrity requirements, and applicable rules when using or modifying it. No connection to or endorsement from Wayground is claimed.
+This independent experimental project is provided **as is**. Respect website terms, academic-integrity policies, and applicable rules.
