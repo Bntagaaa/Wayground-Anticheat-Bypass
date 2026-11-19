@@ -1,27 +1,33 @@
 {
   "manifest_version": 3,
   "name": "Wayground Helper (Firefox)",
-  "version": "0.2.0",
-  "description": "Wayground-specific page interaction customization for Firefox.",
+  "version": "0.3.0",
+  "description": "Page interaction customization with selectable site scope for Firefox.",
   "browser_specific_settings": {
     "gecko": {
       "id": "wayground-helper@example.org",
       "strict_min_version": "128.0"
     }
   },
-  "content_scripts": [
-    {
-      "matches": [
-        "*://*.wayground.com/*",
-        "*://wayground.com/*"
-      ],
-      "js": [
-        "content.js"
-      ],
-      "run_at": "document_start",
-      "all_frames": true,
-      "match_about_blank": true,
-      "world": "MAIN"
-    }
-  ]
+  "permissions": [
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://wayground.com/*",
+    "*://*.wayground.com/*"
+  ],
+  "optional_host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "action": {
+    "default_title": "Wayground Helper Settings",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  }
 }
