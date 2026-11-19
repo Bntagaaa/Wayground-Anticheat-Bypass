@@ -44,7 +44,8 @@
       matches,
       runAt: "document_start",
       allFrames: true,
-      matchAboutBlank: true,
+      // Cover origin-matched about:/data:/blob: frames using the supported API field.
+      matchOriginAsFallback: true,
       world: "MAIN",
       persistAcrossSessions: true
     }]);
