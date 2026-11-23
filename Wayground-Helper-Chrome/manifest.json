@@ -1,21 +1,25 @@
 {
   "manifest_version": 3,
   "name": "Wayground-Helper",
-  "version": "0.1.0",
-  "description": "Bypass Wayground AntiCheat Protection",
-  "content_scripts": [
-    {
-      "matches": [
-        "*://*.wayground.com/*",
-        "*://wayground.com/*"
-      ],
-      "js": [
-        "content.js"
-      ],
-      "run_at": "document_start",
-      "all_frames": true,
-      "match_about_blank": true,
-      "world": "MAIN"
-    }
-  ]
+  "version": "0.2.0",
+  "description": "Page interaction customization with selectable site scope.",
+  "permissions": [
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://wayground.com/*",
+    "*://*.wayground.com/*"
+  ],
+  "optional_host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "action": {
+    "default_title": "Wayground Helper Settings",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
 }

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wayground Helper Settings</title>
+  <link rel="stylesheet" href="popup.css">
+  <script src="popup.js" defer></script>
+</head>
+<body>
+  <main class="panel">
+    <header class="header">
+      <div class="app-mark" aria-hidden="true">W</div>
+      <div>
+        <h1>Wayground Helper</h1>
+        <p class="subtitle">Extension Settings</p>
+      </div>
+    </header>
+
+    <section class="settings" aria-labelledby="scope-heading">
+      <h2 id="scope-heading">Apply to</h2>
+      <p class="intro">Pilih situs tempat ekstensi dijalankan.</p>
+      <fieldset id="scope-options" disabled>
+        <legend class="sr-only">Cakupan ekstensi</legend>
+        <label class="option">
+          <input type="radio" name="scope" value="wayground" checked>
+          <span class="option-body">
+            <strong>Wayground Only</strong>
+            <span>Hanya wayground.com dan subdomainnya</span>
+          </span>
+        </label>
+        <label class="option">
+          <input type="radio" name="scope" value="all">
+          <span class="option-body">
+            <strong>All Websites</strong>
+            <span>Semua situs HTTP &amp; HTTPS</span>
+          </span>
+        </label>
+      </fieldset>
+    </section>
+
+    <p id="status" class="status" role="status" aria-live="polite">Memuat pengaturan…</p>
+    <div class="notice">
+      <strong>Perhatian</strong>
+      <p>Mode semua situs memerlukan izin tambahan dan dapat mengganggu fitur situs lain. Gunakan hanya jika diizinkan.</p>
+    </div>
+    <p class="footnote">Muat ulang tab yang sudah terbuka setelah mengubah cakupan.</p>
+  </main>
+</body>
+</html>
